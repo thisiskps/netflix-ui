@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import backgroundImage from "../assets/home.jpg";
+import backgroundImage from "../assets/home.png";
 import MovieLogo from "../assets/homeTitle.webp";
 
 import { onAuthStateChanged } from "firebase/auth";
@@ -49,7 +49,9 @@ function Netflix() {
         />
         <div className="container">
           <div className="logo">
-            <img src={MovieLogo} alt="Movie Logo" />
+            {/* <img src={MovieLogo} alt="Movie Logo" /> */}
+            <h2>Top Gun:</h2>
+            <h4>Maverick</h4>
           </div>
           <div className="buttons flex">
           <button className="flex j-center a-center" onClick={()=>navigate('/player')}>
@@ -81,11 +83,11 @@ background-color: black;
     position: absolute;
       bottom: 5rem;
       .logo{
-        img{
           width: 100%;
           height: 100%;
-          margin-left: 5rem;
-        }
+          font-size: 5rem;
+          margin-left: 4.5rem;
+          padding: 0.5rem
       }
       .buttons{
         margin: 5rem;
