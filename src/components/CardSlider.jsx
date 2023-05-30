@@ -4,12 +4,10 @@ import styled from 'styled-components';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 
-
-
-export default function CardSlider({ data, title }) {
-  const [showControls, setShowControls] = useState(false);
-  const [sliderPosition, setSliderPosition] = useState(0)
+export default React.memo(function CardSlider({ data, title }) {
   const listRef = useRef()
+  const [showControls, setShowControls] = useState(false);
+  const [sliderPosition, setSliderPosition] = useState(0);
   const handleDirection = (direction) => {
     let distance = listRef.current.getBoundingClientRect().x - 70;
     if (direction === "left" && sliderPosition > 0) {
@@ -24,6 +22,7 @@ export default function CardSlider({ data, title }) {
   return (
     <Container
       className="flex column"
+      showControls={showControls}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(true)}
     >
@@ -43,7 +42,7 @@ export default function CardSlider({ data, title }) {
       </div>
     </Container>
   );
-}
+});
 
 const Container = styled.div`
 gap: 1rem;

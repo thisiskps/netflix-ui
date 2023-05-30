@@ -15,6 +15,8 @@ import {
     const {data:{genres},}= await axios.get(`${TMDB_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
     return genres
   })
+
+
  
 
   export const getUsersLikedMovies = createAsyncThunk(
@@ -34,7 +36,7 @@ import {
         netflix: { genres },
       } = thunkAPI.getState();
       return getRawData(
-        `${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}_genres=${genre}`,
+        `${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`,
         genres
       );
     }
@@ -125,5 +127,20 @@ import {
   export const store = configureStore({
     reducer:{
         netflix: NetflixSlice.reducer,
-    },
+    }, middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+    serializableCheck: false,
+    }),
 })
+
+// const store = configureStore({
+//   reducer: {cartItems},
+//   middleware: (getDefaultMiddleware) =>
+// getDefaultMiddleware({
+// serializableCheck: false,
+// }),
+// })
+
+// https://api.themoviedb.org/3/discover/movie?api_key=740b97b7ecd62513ec525187883d0b5f&with_genres=35
+
+// https://api.themoviedb.org/3/discover/movie?api_key=740b97b7ecd62513ec525187883d0b5f_genres=35

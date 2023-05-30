@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { removeMovieFromLiked } from "../store";
 import video from "../assets/video.mp4";
 
-function Card({ index, movieData, isLiked = false }) {
+export default React.memo(function Card({ index, movieData, isLiked = false }) {
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -60,7 +60,7 @@ function Card({ index, movieData, isLiked = false }) {
                                 <IoPlayCircleSharp title="Play" onClick={() => navigate("/player")} />
                                 <RiThumbUpFill title="Like" />
                                 <RiThumbDownFill title="Dislike" />
-                                {isLiked ? ( <BsCheck title="Remove from List"  />) : (<AiOutlinePlus title="Add to my list" />
+                                {isLiked ? ( <BsCheck title="Remove from List"  onClick={() =>dispatch(removeMovieFromLiked({ movieId: movieData.id, email }))} />) : (<AiOutlinePlus title="Add to my list" onClick={addToList}/>
                                 )}
                             </div>
                             <div className="info">
@@ -82,9 +82,7 @@ function Card({ index, movieData, isLiked = false }) {
         </Container>
     );
 
-}
-
-export default Card;
+});
 
 const Container = styled.div`
   max-width: 230px;
